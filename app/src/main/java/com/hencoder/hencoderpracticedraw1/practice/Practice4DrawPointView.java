@@ -2,11 +2,19 @@ package com.hencoder.hencoderpracticedraw1.practice;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class Practice4DrawPointView extends View {
+
+    private static final String TAG = Practice4DrawPointView.class.getSimpleName();
+    private Paint mPaint;
+    private int w;
+    private int h;
 
     public Practice4DrawPointView(Context context) {
         super(context);
@@ -14,10 +22,19 @@ public class Practice4DrawPointView extends View {
 
     public Practice4DrawPointView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mPaint = initPaint();
     }
 
     public Practice4DrawPointView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        this.w = w;
+        this.h = h;
     }
 
     @Override
@@ -27,5 +44,22 @@ public class Practice4DrawPointView extends View {
 //        练习内容：使用 canvas.drawPoint() 方法画点
 //        一个圆点，一个方点
 //        圆点和方点的切换使用 paint.setStrokeCap(cap)：`ROUND` 是圆点，`BUTT` 或 `SQUARE` 是方点
+        float x1 = w / 2 - 150;
+        float x2 = w / 2 + 150;
+        float Pointh = h / 2;
+        Log.v(TAG, "x1:" + x1);
+        Log.v(TAG, "x2:" + x2);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        canvas.drawPoint(x1, Pointh, mPaint);
+        mPaint.setStrokeCap(Paint.Cap.SQUARE);
+        canvas.drawPoint(x2, Pointh, mPaint);
+    }
+
+    private Paint initPaint() {
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStrokeWidth(40);
+        paint.setColor(Color.BLACK);
+//        paint.setStyle(Paint.Style.FILL);
+        return paint;
     }
 }
