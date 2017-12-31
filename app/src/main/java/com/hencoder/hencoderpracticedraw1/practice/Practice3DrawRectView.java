@@ -16,6 +16,7 @@ public class Practice3DrawRectView extends View {
     private Paint mPaint;
     private int w;
     private int h;
+    private Rect rect;
 
     public Practice3DrawRectView(Context context) {
         super(context);
@@ -24,6 +25,7 @@ public class Practice3DrawRectView extends View {
     public Practice3DrawRectView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mPaint = initPaint();
+        rect = new Rect();
     }
 
     public Practice3DrawRectView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -50,7 +52,7 @@ public class Practice3DrawRectView extends View {
         Log.v(TAG, "top:" + top);
         Log.v(TAG, "right:" + right);
         Log.v(TAG, "bottom:" + bottom);
-        Rect rect = new Rect(left, top, right, bottom);
+        rect.set(left, top, right, bottom);
         canvas.drawRect(rect, mPaint);
     }
 
@@ -60,4 +62,5 @@ public class Practice3DrawRectView extends View {
         paint.setStyle(Paint.Style.FILL);
         return paint;
     }
+
 }
